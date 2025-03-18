@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doanh số bán hàng</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .bar {
+            stroke: #000;
+        }
+        .label {
+            font-size: 12px;
+            fill: black;
+        }
+        .tooltip {
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .menu {
+            margin-bottom: 10px;
+        }
+        .menu button {
+            margin-right: 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: lightgray;
+            cursor: pointer;
+        }
+        .menu button.active {
+            background-color: steelblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Doanh số bán hàng</h1>
+
+    <!-- Menu chuyển đổi giữa các biểu đồ -->
+    <div class="menu">
+        <button onclick="updateChart('Q1')" id="btnQ1">Q1</button>
+        <button onclick="updateChart('Q2')" id="btnQ2">Q2</button>
+        <button onclick="updateChart('Q3')" id="btnQ3">Q3</button>
+        <button onclick="updateChart('Q4')" id="btnQ4">Q4</button>
+        <button onclick="updateChart('Q5')" id="btnQ5">Q5</button>
+        <button onclick="updateChart('Q6')" id="btnQ6">Q6</button>
+        <button onclick="updateChart('Q7')" id="btnQ7">Q7</button>
+        <button onclick="updateChart('Q8')" id="btnQ8">Q8</button>
+        <button onclick="updateChart('Q9')" id="btnQ9">Q9</button>
+        <button onclick="updateChart('Q10')" id="btnQ10">Q10</button>
+        <button onclick="updateChart('Q11')" id="btnQ11">Q11</button>
+        <button onclick="updateChart('Q12')" id="btnQ12">Q12</button>
+    </div>
+
+    <svg id="chart"></svg>
+
+    <script src="main/Q1.js"></script>
+    <script src="main/Q2.js"></script>
+    <script src="main/Q3.js"></script>
+    <script src="main/Q4.js"></script>
+    <script src="main/Q5.js"></script>
+    <script src="main/Q6.js"></script>
+    <script src="main/Q7.js"></script>
+    <script src="main/Q8.js"></script>
+    <script src="main/Q9.js"></script>
+    <script src="main/Q10.js"></script>
+    <script src="main/Q11.js"></script>
+    <script src="main/Q12.js"></script>
+    <script>
+        let currentChart = "Q1";
+    
+        function updateChart(chartType) {
+            if (chartType === currentChart) return; // Nếu đang hiển thị thì không làm gì
+            currentChart = chartType;
+    
+            // Xóa nội dung cũ nhưng giữ nguyên SVG
+            d3.select("#chart").selectAll("*").remove();
+    
+            // Gọi hàm vẽ biểu đồ
+            if (chartType === "Q1") {
+                drawQ1();
+            } else if (chartType === "Q2") {
+                drawQ2();
+            } else if (chartType === "Q3") {
+                drawQ3();
+            } else if (chartType === "Q4") {
+                drawQ4();
+            } else if (chartType === "Q5") {
+                drawQ5();
+            } else if (chartType === "Q6") {
+                drawQ6();
+            } else if (chartType === "Q7") {
+                drawQ7();
+            } else if (chartType === "Q8") {
+                drawQ8();
+            } else if (chartType === "Q9") {
+                drawQ9();
+            } else if (chartType === "Q10") {
+                drawQ10();
+            } else if (chartType === "Q11") {
+                drawQ11();
+            } else if (chartType === "Q12") {
+                drawQ12();
+            }
+    
+            // Đánh dấu nút đang được chọn
+            document.querySelectorAll(".menu button").forEach(btn => btn.classList.remove("active"));
+            document.getElementById(`btn${chartType}`).classList.add("active");
+        }
+    
+        // Mặc định hiển thị Q1 ngay khi mở trang
+        document.addEventListener("DOMContentLoaded", () => {
+            drawQ1(); // Gọi trực tiếp hàm vẽ Q1 khi trang tải xong
+            document.getElementById("btnQ1").classList.add("active"); // Đánh dấu nút Q1
+        });
+    </script>
+
+</body>
+</html>
+
